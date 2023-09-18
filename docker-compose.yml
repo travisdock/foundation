@@ -18,8 +18,12 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - postgres
+      postgres:
+        condition: "service_started"
+        required: false
     stdin_open: true
     tty: true
+    restart: unless-stopped
+    init: true
 volumes:
   postgres: {}
